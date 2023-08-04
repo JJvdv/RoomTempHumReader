@@ -12,8 +12,8 @@ Room Temperature and Humidity Reader web application to view temperature &amp; h
 - DHT11 Sensor
 - Internet Connection
  
-  ### Interface Example
+### Interface Example
 
-Room Temp.png
+![Room Temperature](RoomTemp.PNG)
 
-Room humidity.png
+![Room Humidity](RoomHum.PNG)
