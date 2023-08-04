@@ -1,0 +1,152 @@
+{% load static %}
+<html>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/js/bootstrap.min.js"></script>
+	<head>
+		<script>
+			window.onload = function () {
+			var chart = new CanvasJS.Chart("chartContainerHum", {
+				theme: "dark2",
+				exportEnabled: true,
+				title:{
+				text: "Room Humidity Statistics",
+				fontFamily: "Arial"
+				},
+				axisY: {
+				suffix: "%"
+				},
+				axisX: {
+					labelAngle: -50
+				},
+				data: [
+				{        
+					type: "spline",
+					lineColor: "turquoise",
+					markerSize: 0,
+					yValueFormatString: "#,##0.0#'%'",
+					dataPoints: {{ humData|safe }}
+				}
+				]
+			});
+			chart.render();
+
+			var chart2 = new CanvasJS.Chart("chartContainerTemp", {
+				theme: "dark2",
+				exportEnabled: true,
+				title:{
+				text: "Room Temperature Statistics",
+				fontFamily: "Arial"
+				},
+				axisY: {
+				suffix: "°C"
+				},
+				axisX: {
+					labelAngle: -50
+				},
+				data: [
+				{        
+					type: "spline",
+					markerSize: 0,
+					lineColor: "turquoise",
+					yValueFormatString: "#,##0.0#'°C'",
+					dataPoints: {{ tempData|safe }}
+				}
+				]
+			});
+			chart2.render();
+			}
+		</script>    
+	</head>
+	<body>
+		<br/>
+		<div id="chartContainerTemp" style="width: 90%; height: 360px; padding-left: 30px;"></div>
+		<br/>
+		<br/>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="card text-bg-success mb-3" style="opacity: 0.8">
+						<div class="card-header">Current Temperature</div>
+						<div class="card-body">
+							<i class="fa fa-thermometer-empty"></i>
+							  <h5 class="card-title">{{ tempCurrent | safe }} °C</h5>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="card text-bg-danger mb-3" style="opacity: 0.8">
+						<div class="card-header">Maximum Temperature</div>
+						<div class="card-body">
+							<i class="fa fa-sun-o"></i>
+							  <h5 class="card-title">{{ maximumTemp | safe }} °C</h5>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="card text-bg-info mb-3" style="opacity: 0.8">
+						<div class="card-header">Lowest Temperature</div>
+						<div class="card-body">
+							<i class="fa fa-snowflake-o"></i>
+							  <h5 class="card-title">{{ lowestTemp | safe }} °C</h5>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="card text-bg-secondary mb-3" style="opacity: 0.8">
+						<div class="card-header">Average Temperature</div>
+						<div class="card-body">
+							<i class="fa fa-thermometer-2"></i>
+							  <h5 class="card-title">{{ averageTemp | safe }} °C</h5>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br/>
+		<div id="chartContainerHum" style="width: 90%; height: 360px; padding-left: 30px;"></div>
+		<br/>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="card text-bg-success mb-3" style="opacity: 0.8">
+						<div class="card-header">Current Humidity</div>
+						<div class="card-body">
+							<i class="fa fa-thermometer-empty"></i>
+							  <h5 class="card-title">{{ humCurrent | safe }} %</h5>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="card text-bg-danger mb-3" style="opacity: 0.8">
+						<div class="card-header">Maximum Humidity</div>
+						<div class="card-body">
+							<i class="fa fa-sun-o"></i>
+							  <h5 class="card-title">{{ maximumHum | safe }} %</h5>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="card text-bg-info mb-3" style="opacity: 0.8">
+						<div class="card-header">Lowest Humidity</div>
+						<div class="card-body">
+							<i class="fa fa-snowflake-o"></i>
+							  <h5 class="card-title">{{ lowestHum | safe }} %</h5>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="card text-bg-secondary mb-3" style="opacity: 0.8">
+						<div class="card-header">Average Humidity</div>
+						<div class="card-body">
+							<i class="fa fa-thermometer-2"></i>
+							  <h5 class="card-title">{{ averageHum | safe }} %</h5>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br/>
+	<script src="{% static 'canvasjs.min.js' %}"></script>
+	</body>
+</html> 
