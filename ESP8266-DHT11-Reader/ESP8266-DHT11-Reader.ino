@@ -10,7 +10,7 @@
 
 const char* SSID = "WIFI_SSID";
 const char* PASS = "WIFI_PASSWORD";
-const long utcOffsetInSeconds = 7200; // 2 * 60 * 60 for UCT + 2
+const long utcOffsetInSeconds = 7200; // 2 * 60 * 60
 
 float prevTemp = 0.0;
 int prevHum = 0;
